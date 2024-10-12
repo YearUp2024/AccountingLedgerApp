@@ -45,7 +45,7 @@ public class AddDeposit {
 
     public static void AddDepositToCSV(String description, String vendor, double amount){
         try{
-            FileWriter fileWriter = new FileWriter("deposit.csv", true);
+            FileWriter fileWriter = new FileWriter("transactions.csv", true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
             bufferedWriter.write(String.format("Deposit|%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount));

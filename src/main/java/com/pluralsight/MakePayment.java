@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
@@ -44,6 +46,16 @@ public class MakePayment {
     }
 
     public static void AddPaymentToCSV(String description, String vendor, double amount){
-        System.out.printf("Payment|%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount);
+        try{
+            FileWriter fileWriter = new FileWriter("transactions.csv", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            bufferedWriter.write(String.format("Payment|%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount));
+            bufferedWriter.close();
+
+            System.out.println("Payment Added Successfully!");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
