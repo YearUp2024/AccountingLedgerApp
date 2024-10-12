@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class HomeScreen {
     static Scanner scanner = new Scanner(System.in);
     static AddDeposit addDeposit = new AddDeposit();
+    static MakePayment makePayment = new MakePayment();
 
     public static void main(String[] args) {
         Options();
@@ -23,6 +24,11 @@ public class HomeScreen {
             if(userChoice.equalsIgnoreCase("D")){
                 System.out.println("------------------------------");
                 addDeposit.main();
+                System.out.println("------------------------------");
+            }
+            if(userChoice.equalsIgnoreCase("P")){
+                System.out.println("------------------------------");
+                makePayment.main();
                 System.out.println("------------------------------");
             }
             if(userChoice.equalsIgnoreCase("E")){
