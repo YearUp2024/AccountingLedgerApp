@@ -37,7 +37,13 @@ public class MakePayment {
         System.out.println("Thank You");
     }
 
-    public static void AddPaymentToCSV(String description, String vendor, double amount){
+    public static String TimeAndDate(){
+        LocalDate localDate = LocalDate.now();
+        LocalTime localTime = LocalTime.now();
+        return localDate + "|" + localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond();
+    }
 
+    public static void AddPaymentToCSV(String description, String vendor, double amount){
+        System.out.printf("Payment|%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount);
     }
 }
