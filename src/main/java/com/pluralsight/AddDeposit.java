@@ -48,7 +48,7 @@ public class AddDeposit {
             FileWriter fileWriter = new FileWriter("deposit.csv", true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            bufferedWriter.write(String.format("%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount));
+            bufferedWriter.write(String.format("Deposit|%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount));
             bufferedWriter.close();
 
             System.out.println("Deposit Added Successfully!");
