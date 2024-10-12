@@ -10,6 +10,7 @@ public class HomeScreen {
     static Scanner scanner = new Scanner(System.in);
     static AddDeposit addDeposit = new AddDeposit();
     static MakePayment makePayment = new MakePayment();
+    static Ledger ledger = new Ledger();
 
     /**
      * This main method is calling Operation method.
@@ -43,6 +44,12 @@ public class HomeScreen {
             if(userChoice.equalsIgnoreCase("P")){
                 System.out.println("------------------------------");
                 makePayment.main();
+                System.out.println("------------------------------");
+            }
+            //This is checking if the used is calling Ledger Class
+            if(userChoice.equalsIgnoreCase("L")){
+                System.out.println("------------------------------");
+                ledger.main();
                 System.out.println("------------------------------");
             }
             //This is checking if the used wants to end the loop
