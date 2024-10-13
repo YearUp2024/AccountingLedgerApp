@@ -12,6 +12,7 @@ import java.util.Scanner;
  */
 public class AddDeposit {
     static Scanner scanner = new Scanner(System.in);
+    static TotalBalance totalBalance = new TotalBalance();
 
     /**
      * This method is calling PromptForDeposit method.
@@ -38,9 +39,8 @@ public class AddDeposit {
             Double amount = scanner.nextDouble();
             scanner.nextLine();
 
-            System.out.println("\nYour deposit: ");
             AddDepositToCSV(description, vendor, amount);//This is passing description, vendor, amount to AddDepositToCSV method
-            System.out.println("-----------------------------");
+            System.out.println("\n-----------------------------");
 
             makeDeposit = GetYesOrNo();
 
@@ -92,6 +92,9 @@ public class AddDeposit {
             bufferedWriter.close();
 
             System.out.println("Deposit Added Successfully!");
+
+            double updatedBalance = totalBalance.Balance();
+            System.out.printf("Current Balance: %.2f", updatedBalance);
         }catch(Exception e){
             e.printStackTrace();
         }
