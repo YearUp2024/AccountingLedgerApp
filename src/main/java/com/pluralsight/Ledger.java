@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Ledger {
     static Scanner scanner = new Scanner(System.in);
     static DisplayAllEntries displayAllEntries = new DisplayAllEntries();
+    static DepositsOnly depositsOnly = new DepositsOnly();
 
     /**
      * This main method is calling Options method.
@@ -33,6 +34,12 @@ public class Ledger {
             if(userChoose.equalsIgnoreCase("A")){
                 System.out.println("------------------------------");
                 displayAllEntries.main();
+                System.out.println("------------------------------");
+            }
+
+            if(userChoose.equalsIgnoreCase("D")){
+                System.out.println("------------------------------");
+                depositsOnly.main();
                 System.out.println("------------------------------");
             }
 
