@@ -1,7 +1,54 @@
 package com.pluralsight;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.HashMap;
+
 public class DisplayAllEntries {
     public static void main() {
-        System.out.println("All Entries");
+        HashMap<String, String[]> allEntries = LoadAllEntries();
+        DisplayAllEntries(allEntries);
+    }
+
+    public static HashMap<String, String[]> LoadAllEntries(){
+        String fileToGetDataFrom = "transactions.csv";
+        HashMap<String, String[]> allProducts = new HashMap<>();
+        int lineCounter = 1;
+
+        try{
+            FileReader fileReader = new FileReader(fileToGetDataFrom);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String readLine;
+            while((readLine = bufferedReader.readLine()) != null){
+                String[] data = readLine.split("\\|");
+
+                if(data.length == 6){
+                    //This is creating a unique key that can be used to identify products.
+                    String uniqueKey = data[0] + "-" + lineCounter;
+                    allProducts.put(uniqueKey, new String[]{data[1], data[2], data[3], data[4], data[5]});
+                    lineCounter++;
+                }else{
+                    System.out.println("Some elements are missing " + readLine);
+                }
+            }
+            bufferedReader.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return allProducts;
+    }
+
+    public static void DisplayAllEntries(HashMap<String, String[]> allEntries){
+        if(allEntries.isEmpty()){
+            System.out.println("No entries found");
+        }else{
+            for(String key : allEntries.keySet()){
+                String[] data = allEntries.get(key);
+                //key.split("-")[0] gets unique identifier
+                System.out.printf("%s|%s|%s|%s|%s|%s\n", key.split("-")[0], data[0], data[1], data[2], data[3], data[4]);
+            }
+        }
     }
 }
