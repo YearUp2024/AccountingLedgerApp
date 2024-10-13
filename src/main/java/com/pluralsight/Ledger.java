@@ -2,14 +2,24 @@ package com.pluralsight;
 
 import java.util.Scanner;
 
+/**
+ * This class is going to prompt the users to choose from different choices. Based on the user choice different
+ * information will be printed.
+ */
 public class Ledger {
     static Scanner scanner = new Scanner(System.in);
     static DisplayAllEntries displayAllEntries = new DisplayAllEntries();
 
+    /**
+     * This main method is calling Options method.
+     */
     public static void main() {
         Options();
     }
 
+    /**
+     * This method will allow the users to choose from different options.
+     */
     public static void Options(){
         while(true) {
             System.out.println("Display [A]ll Entries");

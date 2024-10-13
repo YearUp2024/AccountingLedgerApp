@@ -4,12 +4,24 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
 
+/**
+ * This class is going to print All the Transactions in the screen.
+ */
 public class DisplayAllEntries {
+    /**
+     * In this main method a HashMap is calling LoadAllEntries method to get the transactions and store it in
+     * a HashMap. And then the transactions are being passed onto DisplayAllEntries method so it can be
+     * printed in the screen.
+     */
     public static void main() {
         HashMap<String, String[]> allEntries = LoadAllEntries();
         DisplayAllEntries(allEntries);
     }
 
+    /**
+     * This method is loading the transactions from transactions.csv and storing it in a HashMap.
+     * @return allProducts
+     */
     public static HashMap<String, String[]> LoadAllEntries(){
         String fileToGetDataFrom = "transactions.csv";
         HashMap<String, String[]> allProducts = new HashMap<>();
@@ -40,6 +52,10 @@ public class DisplayAllEntries {
         return allProducts;
     }
 
+    /**
+     * This method is printing all the transactions to the screen. 
+     * @param allEntries
+     */
     public static void DisplayAllEntries(HashMap<String, String[]> allEntries){
         if(allEntries.isEmpty()){
             System.out.println("No entries found");
