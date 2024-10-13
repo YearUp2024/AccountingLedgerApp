@@ -3,8 +3,15 @@ package com.pluralsight;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+/**
+ * This class is going to Calculate Total balance after making a deposit or a payment.
+ */
 public class TotalBalance {
-    public static double Balance(){
+    /**
+     * This main method is calculating Total Balance.
+     * @return
+     */
+    public static double main(){
         double balance = 0.0;
 
         try {
@@ -17,6 +24,7 @@ public class TotalBalance {
 
                 if(data.length == 6) {
                     String transactionType = data[0];
+                    //This is convergent the number from string to double and trim is removing any space before and after.
                     double amount = Double.parseDouble(data[5].trim());
 
                     if(transactionType.equalsIgnoreCase("Deposit")) {
@@ -32,5 +40,4 @@ public class TotalBalance {
         }
         return balance;
     }
-
 }

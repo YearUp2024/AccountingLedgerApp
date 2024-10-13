@@ -93,7 +93,7 @@ public class AddDeposit {
 
             System.out.println("Deposit Added Successfully!");
 
-            double updatedBalance = totalBalance.Balance();
+            double updatedBalance = totalBalance.main();
             System.out.printf("Current Balance: %.2f", updatedBalance);
         }catch(Exception e){
             e.printStackTrace();
