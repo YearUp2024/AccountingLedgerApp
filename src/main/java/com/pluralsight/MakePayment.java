@@ -30,25 +30,41 @@ public class MakePayment {
 
             System.out.print("Description: ");
             String description = scanner.nextLine();
-            System.out.println(description);
 
             System.out.print("Vendor: ");
             String vendor = scanner.nextLine();
-            System.out.println(vendor);
 
             System.out.print("Amount: ");
             Double amount = scanner.nextDouble();
-            System.out.println(amount);
             scanner.nextLine();
 
             System.out.println("\nYour Payment: ");
             AddPaymentToCSV(description, vendor, amount);//This is passing description, vendor, amount to AddPaymentToCSV method
             System.out.println("-----------------------------");
 
-            System.out.print("Make another Deposit (Y/N): ");
-            makePayment = scanner.nextLine();
+            makePayment = GetYesOrNo();
+
         }while(makePayment.equalsIgnoreCase("Y") || makePayment.equalsIgnoreCase("YES"));
         System.out.println("Thank You");
+    }
+
+    /**
+     * This method is going to make sure that the user enters Y or N to more forward.
+     * @return response
+     */
+    public static String GetYesOrNo(){
+        String response = "";
+
+        while(true){
+            if(response.equalsIgnoreCase("Y") || response.equalsIgnoreCase("Yes") ||
+                    response.equalsIgnoreCase("N") || response.equalsIgnoreCase("No")){
+                break;
+            }else{
+                System.out.print("Please enter (Y or N): ");
+                response = scanner.nextLine();
+            }
+        }
+        return response;
     }
 
     /**
