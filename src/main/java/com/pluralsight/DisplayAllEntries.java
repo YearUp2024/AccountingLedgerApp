@@ -41,7 +41,7 @@ public class DisplayAllEntries {
                     allProducts.put(uniqueKey, new String[]{data[1], data[2], data[3], data[4], data[5]});
                     lineCounter++;
                 }else{
-                    System.out.println("Some elements are missing " + readLine);
+                    System.out.println(readLine + " Some elements are missing ");
                 }
             }
             bufferedReader.close();
@@ -53,7 +53,7 @@ public class DisplayAllEntries {
     }
 
     /**
-     * This method is printing all the transactions to the screen. 
+     * This method is printing all the transactions to the screen.
      * @param allEntries
      */
     public static void DisplayAllEntries(HashMap<String, String[]> allEntries){
