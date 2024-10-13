@@ -42,10 +42,29 @@ public class AddDeposit {
             AddDepositToCSV(description, vendor, amount);//This is passing description, vendor, amount to AddDepositToCSV method
             System.out.println("-----------------------------");
 
-            System.out.print("Make another Deposit (Y/N): ");
-            makeDeposit = scanner.nextLine();
+            makeDeposit = GetYesOrNo();
+
         }while(makeDeposit.equalsIgnoreCase("Y") || makeDeposit.equalsIgnoreCase("YES"));
         System.out.println("Thank You");
+    }
+
+    /**
+     * This method is going to make sure that the user enters Y or N to more forward.
+     * @return response
+     */
+    public static String GetYesOrNo(){
+        String response = "";
+
+        while(true){
+            if(response.equalsIgnoreCase("Y") || response.equalsIgnoreCase("Yes") ||
+                    response.equalsIgnoreCase("N") || response.equalsIgnoreCase("No")){
+                break;
+            }else{
+                System.out.print("Please enter (Y or N): ");
+                response = scanner.nextLine();
+            }
+        }
+        return response;
     }
 
     /**
