@@ -18,7 +18,23 @@ public class AddDeposit {
      * This method is calling PromptForDeposit method.
      */
     public static void main() {
-        PromptForDeposit();
+        MakeDepositOrSeeDeposits();
+    }
+
+    /**
+     * This method is going to ask the user if they just want to see the deposit balance or if they would like to
+     * make a deposit.
+     */
+    public static void MakeDepositOrSeeDeposits(){
+        System.out.print("Do you want to make a Payment or do you want to see Payment Balance: ");
+        String userChoice = scanner.nextLine();
+
+        if(userChoice.equalsIgnoreCase("P") || userChoice.equalsIgnoreCase("Payment")){
+            PromptForDeposit();
+        } else if(userChoice.equalsIgnoreCase("B") || userChoice.equalsIgnoreCase("Balance")){
+            double updatedBalance = totalBalance.main();
+            System.out.printf("Current Balance: %.2f\n", updatedBalance);
+        }
     }
 
     /**
