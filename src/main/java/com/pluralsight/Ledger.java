@@ -10,6 +10,7 @@ public class Ledger {
     static Scanner scanner = new Scanner(System.in);
     static DisplayAllEntries displayAllEntries = new DisplayAllEntries();
     static DepositsOnly depositsOnly = new DepositsOnly();
+    static TotalBalance totalBalance = new TotalBalance();
 
     /**
      * This main method is calling Options method.

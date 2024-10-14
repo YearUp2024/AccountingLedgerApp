@@ -26,14 +26,23 @@ public class MakePayment {
      * make a payment.
      */
     public static void MakePayOrSeePay(){
-        System.out.print("Do you want to make a Payment or do you want to see Payment Balance: ");
-        String userChoice = scanner.nextLine();
+        while(true){
+            System.out.println("Make [P]ayment");
+            System.out.println("See [B]alance");
+            System.out.println("[E]xit");
+            String userChoice = scanner.nextLine();
 
-        if(userChoice.equalsIgnoreCase("P") || userChoice.equalsIgnoreCase("Payment")){
-            PromptForPayment();
-        } else if(userChoice.equalsIgnoreCase("B") || userChoice.equalsIgnoreCase("Balance")){
-            double updatedBalance = totalBalance.main();
-            System.out.printf("Current Balance: %.2f\n", updatedBalance);
+            if(userChoice.equalsIgnoreCase("P")){
+                PromptForPayment();
+            }
+            if(userChoice.equalsIgnoreCase("B")){
+                double updatedBalance = totalBalance.GetTotalPayment();
+                System.out.printf("Current Balance: %.2f\n", updatedBalance);
+                System.out.println("------------------------------");
+            }
+            if(userChoice.equalsIgnoreCase("E")){
+                break;
+            }
         }
     }
 
@@ -110,7 +119,7 @@ public class MakePayment {
 
             System.out.println("Payment Added Successfully!");
 
-            double updatedBalance = totalBalance.main();
+            double updatedBalance = totalBalance.GetTotalPayment();
             System.out.printf("Current Balance: %.2f", updatedBalance);
         }catch(Exception e){
             e.printStackTrace();
