@@ -12,12 +12,29 @@ import java.util.Scanner;
  */
 public class MakePayment {
     static Scanner scanner = new Scanner(System.in);
+    static TotalBalance totalBalance = new TotalBalance();
 
     /**
      * This method is calling PromptForPayment method.
      */
     public static void main() {
-        PromptForPayment();
+        MakePayOrSeePay();
+    }
+
+    /**
+     * This method is going to ask the user if they just want to see the payment balance or if they would like to
+     * make a payment.
+     */
+    public static void MakePayOrSeePay(){
+        System.out.print("Do you want to make a Payment or do you want to see Payment Balance: ");
+        String userChoice = scanner.nextLine();
+
+        if(userChoice.equalsIgnoreCase("P") || userChoice.equalsIgnoreCase("Payment")){
+            PromptForPayment();
+        } else if(userChoice.equalsIgnoreCase("B") || userChoice.equalsIgnoreCase("Balance")){
+            double updatedBalance = totalBalance.main();
+            System.out.printf("Current Balance: %.2f\n", updatedBalance);
+        }
     }
 
     /**
@@ -40,7 +57,7 @@ public class MakePayment {
 
             System.out.println("\nYour Payment: ");
             AddPaymentToCSV(description, vendor, amount);//This is passing description, vendor, amount to AddPaymentToCSV method
-            System.out.println("-----------------------------");
+            System.out.println("\n-----------------------------");
 
             makePayment = GetYesOrNo();
 
@@ -92,6 +109,9 @@ public class MakePayment {
             bufferedWriter.close();
 
             System.out.println("Payment Added Successfully!");
+
+            double updatedBalance = totalBalance.main();
+            System.out.printf("Current Balance: %.2f", updatedBalance);
         }catch(Exception e){
             e.printStackTrace();
         }
