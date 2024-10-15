@@ -8,10 +8,7 @@ import java.util.Scanner;
  */
 public class HomeScreenMenu {
     static Scanner scanner = new Scanner(System.in);
-    static MakePaymentMenu makePayment = new MakePaymentMenu();
-    static LedgerMenu ledger = new LedgerMenu();
-
-
+    
     /**
      * This main method is calling Operation method.
      * @param args
@@ -43,13 +40,13 @@ public class HomeScreenMenu {
             //This is checking if the used is calling MakePayment Class
             if(userChoice.equalsIgnoreCase("P")){
                 System.out.println("------------------------------");
-                makePayment.main();
+                MakePaymentMenu.main();
                 System.out.println("------------------------------");
             }
             //This is checking if the used is calling Ledger Class
             if(userChoice.equalsIgnoreCase("L")){
                 System.out.println("------------------------------");
-                ledger.main();
+                LedgerMenu.main();
                 System.out.println("------------------------------");
             }
             //This is checking if the used wants to end the loop
