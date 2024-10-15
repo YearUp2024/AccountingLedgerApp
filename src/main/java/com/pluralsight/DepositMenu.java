@@ -18,31 +18,33 @@ public class DepositMenu {
      * This method is calling PromptForDeposit method.
      */
     public static void main() {
-        MakeDepositOrSeeDeposits();
+        ShowDepositMenu();
     }
 
     /**
      * This method is going to ask the user if they just want to see the deposit balance or if they would like to
      * make a deposit.
      */
-    public static void MakeDepositOrSeeDeposits(){
-        while(true){
-            System.out.println("Make [D]eposit");
+    public static void ShowDepositMenu(){
+        while (true) {
+            System.out.println("\nMake [D]eposit");
             System.out.println("See [B]alance");
             System.out.println("[E]xit");
             System.out.print("Choose from the options: ");
-            String userChoice = scanner.nextLine();
+            String userChoice = scanner.nextLine().trim().toUpperCase();
 
-            if(userChoice.equalsIgnoreCase("D")){
-                PromptForDeposit();
-            }
-            if(userChoice.equalsIgnoreCase("B")){
-                double updatedBalance = transactionBalance.GetTotalDeposits();
-                System.out.printf("Current Balance: %.2f\n", updatedBalance);
-                System.out.println("------------------------------");
-            }
-            if(userChoice.equalsIgnoreCase("E")){
-                break;
+            switch (userChoice) {
+                case "D":
+                    PromptForDeposit();
+                    break;
+                case "B":
+                    ShowBalance();
+                    break;
+                case "E":
+                    System.out.println("Exiting the application. Goodbye!");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
     }
@@ -52,7 +54,7 @@ public class DepositMenu {
      */
     public static void PromptForDeposit(){
         String makeDeposit;
-        do{
+        do {
             System.out.println("Please Enter Deposit Information");
 
             System.out.print("Description: ");
@@ -62,15 +64,15 @@ public class DepositMenu {
             String vendor = scanner.nextLine();
 
             System.out.print("Amount: ");
-            Double amount = scanner.nextDouble();
-            scanner.nextLine();
+            double amount = scanner.nextDouble();
+            scanner.nextLine(); // Consume newline
 
-            AddDepositToCSV(description, vendor, amount);//This is passing description, vendor, amount to AddDepositToCSV method
+            AddDepositToCSV(description, vendor, amount);
             System.out.println("\n-----------------------------");
 
-            makeDeposit = GetYesOrNo();
+            makeDeposit = GetYesOrNo("Would you like to make another deposit? (Y/N): ");
 
-        }while(makeDeposit.equalsIgnoreCase("Y") || makeDeposit.equalsIgnoreCase("YES"));
+        } while (makeDeposit.equalsIgnoreCase("Y"));
         System.out.println("Thank You");
     }
 
@@ -78,50 +80,53 @@ public class DepositMenu {
      * This method is going to make sure that the user enters Y or N to more forward.
      * @return response
      */
-    public static String GetYesOrNo(){
-        String response = "";
-
-        while(true){
-            if(response.equalsIgnoreCase("Y") || response.equalsIgnoreCase("Yes") ||
-                    response.equalsIgnoreCase("N") || response.equalsIgnoreCase("No")){
+    public static String GetYesOrNo(String prompt){
+        String response;
+        while (true) {
+            System.out.print(prompt);
+            response = scanner.nextLine().trim().toUpperCase();
+            if (response.equals("Y") || response.equals("N")) {
                 break;
-            }else{
-                System.out.print("Please enter (Y or N): ");
-                response = scanner.nextLine();
+            } else {
+                System.out.println("Invalid input. Please enter Y or N.");
             }
         }
         return response;
     }
 
     /**
-     * This method is getting Date and Time and storing that into the translations.csv file.
-     * @return Time & Date
+     * Displays the current balance.
      */
-    public static String TimeAndDate(){
+    public static void ShowBalance() {
+        double updatedBalance = transactionBalance.GetTotalDeposits();
+        System.out.printf("Current Balance: $%.2f\n", updatedBalance);
+        System.out.println("------------------------------");
+    }
+
+    /**
+     * Gets the current date and time.
+     * @return The current date and time as a formatted string.
+     */
+    public static String GetTimeAndDate() {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
         return date + "|" + time.getHour() + ":" + time.getMinute() + ":" + time.getSecond();
     }
 
     /**
-     * This method is going to write the information the user passed into transactions.csv file.
-     * @param description
-     * @param vendor
-     * @param amount
+     * Writes the deposit information to the transactions.csv file.
+     * @param description The deposit description.
+     * @param vendor The vendor name.
+     * @param amount The deposit amount.
      */
-    public static void AddDepositToCSV(String description, String vendor, double amount){
-        try{
-            FileWriter fileWriter = new FileWriter("transactions.csv", true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-            bufferedWriter.write(String.format("Deposit|%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount));//TimeAndDate method is called here.
-            bufferedWriter.close();
-
+    public static void AddDepositToCSV(String description, String vendor, double amount) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("transactions.csv", true))) {
+            bufferedWriter.write(String.format("Deposit|%s|%s|%s|%.2f\n", GetTimeAndDate(), description, vendor, amount));
             System.out.println("Deposit Added Successfully!");
 
             double updatedBalance = transactionBalance.GetTotalDeposits();
-            System.out.printf("Current Balance: %.2f", updatedBalance);
-        }catch(Exception e){
+            System.out.printf("Current Balance: $%.2f\n", updatedBalance);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
