@@ -10,9 +10,9 @@ import java.util.Scanner;
  * This Class is going to prompt the use to enter some information for Deposits. After the user
  * enters the information that information will be saved in transactions.csv file.
  */
-public class AddDepositMenu {
+public class DepositMenu {
     static Scanner scanner = new Scanner(System.in);
-    static TotalBalance totalBalance = new TotalBalance();
+    static TransactionBalance transactionBalance = new TransactionBalance();
 
     /**
      * This method is calling PromptForDeposit method.
@@ -37,7 +37,7 @@ public class AddDepositMenu {
                 PromptForDeposit();
             }
             if(userChoice.equalsIgnoreCase("B")){
-                double updatedBalance = totalBalance.GetTotalDeposits();
+                double updatedBalance = transactionBalance.GetTotalDeposits();
                 System.out.printf("Current Balance: %.2f\n", updatedBalance);
                 System.out.println("------------------------------");
             }
@@ -119,7 +119,7 @@ public class AddDepositMenu {
 
             System.out.println("Deposit Added Successfully!");
 
-            double updatedBalance = totalBalance.GetTotalDeposits();
+            double updatedBalance = transactionBalance.GetTotalDeposits();
             System.out.printf("Current Balance: %.2f", updatedBalance);
         }catch(Exception e){
             e.printStackTrace();

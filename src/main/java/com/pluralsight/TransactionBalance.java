@@ -6,7 +6,7 @@ import java.io.FileReader;
 /**
  * This class is going to Calculate Total balance after making a deposit or a payment.
  */
-public class TotalBalance {
+public class TransactionBalance {
     /**
      * This GetTotalDeposits method is calculating Total Balance for Deposit.
      * @return

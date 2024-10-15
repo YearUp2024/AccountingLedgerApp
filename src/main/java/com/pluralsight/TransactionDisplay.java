@@ -7,8 +7,8 @@ import java.util.HashMap;
 /**
  * This class is going to print All the Transactions in the screen.
  */
-public class DisplayAllEntries {
-    static TotalBalance totalBalance = new TotalBalance();
+public class TransactionDisplay {
+    static TransactionBalance transactionBalance = new TransactionBalance();
     /**
      * In this main method a HashMap is calling LoadAllEntries method to get the transactions and store it in
      * a HashMap. And then the transactions are being passed onto DisplayAllEntries method so it can be
@@ -67,6 +67,6 @@ public class DisplayAllEntries {
                 System.out.printf("%s|%s|%s|%s|%s|%s\n", key.split("-")[0], data[0], data[1], data[2], data[3], data[4]);
             }
         }
-        totalBalance.GetAllTotal();
+        transactionBalance.GetAllTotal();
     }
 }

@@ -6,9 +6,9 @@ import java.util.Scanner;
  * When the program starts this Class is going to prompt the users to choose from different options.
  * Based on the user choice this Class is going to call other classes.
  */
-public class HomeScreenMenu {
+public class MainMenu {
     static Scanner scanner = new Scanner(System.in);
-    
+
     /**
      * This main method is calling Operation method.
      * @param args
@@ -34,7 +34,7 @@ public class HomeScreenMenu {
             //This is checking if the used is calling AddDeposit Class
             if(userChoice.equalsIgnoreCase("D")){
                 System.out.println("------------------------------");
-                AddDepositMenu.main();
+                DepositMenu.main();
                 System.out.println("------------------------------");
             }
             //This is checking if the used is calling MakePayment Class

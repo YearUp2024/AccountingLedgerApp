@@ -8,9 +8,9 @@ import java.util.Scanner;
  */
 public class LedgerMenu {
     static Scanner scanner = new Scanner(System.in);
-    static DisplayAllEntries displayAllEntries = new DisplayAllEntries();
+    static TransactionDisplay transactionDisplay = new TransactionDisplay();
     static DepositsOnly depositsOnly = new DepositsOnly();
-    static TotalBalance totalBalance = new TotalBalance();
+    static TransactionBalance transactionBalance = new TransactionBalance();
 
     /**
      * This main method is calling Options method.
@@ -34,7 +34,7 @@ public class LedgerMenu {
 
             if(userChoose.equalsIgnoreCase("A")){
                 System.out.println("------------------------------");
-                displayAllEntries.main();
+                transactionDisplay.main();
                 System.out.println("------------------------------");
             }
 

@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class MakePaymentMenu {
     static Scanner scanner = new Scanner(System.in);
-    static TotalBalance totalBalance = new TotalBalance();
+    static TransactionBalance transactionBalance = new TransactionBalance();
 
     /**
      * This method is calling PromptForPayment method.
@@ -36,7 +36,7 @@ public class MakePaymentMenu {
                 PromptForPayment();
             }
             if(userChoice.equalsIgnoreCase("B")){
-                double updatedBalance = totalBalance.GetTotalPayment();
+                double updatedBalance = transactionBalance.GetTotalPayment();
                 System.out.printf("Current Balance: %.2f\n", updatedBalance);
                 System.out.println("------------------------------");
             }
@@ -119,7 +119,7 @@ public class MakePaymentMenu {
 
             System.out.println("Payment Added Successfully!");
 
-            double updatedBalance = totalBalance.GetTotalPayment();
+            double updatedBalance = transactionBalance.GetTotalPayment();
             System.out.printf("Current Balance: %.2f", updatedBalance);
         }catch(Exception e){
             e.printStackTrace();
