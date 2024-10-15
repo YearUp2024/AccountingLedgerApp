@@ -10,7 +10,7 @@ import java.util.Scanner;
  * This Class is going to prompt the use to enter some information for Deposits. After the user
  * enters the information that information will be saved in transactions.csv file.
  */
-public class AddDeposit {
+public class AddDepositMenu {
     static Scanner scanner = new Scanner(System.in);
     static TotalBalance totalBalance = new TotalBalance();
 
@@ -30,6 +30,7 @@ public class AddDeposit {
             System.out.println("Make [D]eposit");
             System.out.println("See [B]alance");
             System.out.println("[E]xit");
+            System.out.print("Choose from the options: ");
             String userChoice = scanner.nextLine();
 
             if(userChoice.equalsIgnoreCase("D")){

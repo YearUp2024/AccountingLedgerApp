@@ -10,7 +10,7 @@ import java.util.Scanner;
  * This Class is going to prompt the use to enter some information for Payment. After the user
  * enters the information that information will be saved in transactions.csv file.
  */
-public class MakePayment {
+public class MakePaymentMenu {
     static Scanner scanner = new Scanner(System.in);
     static TotalBalance totalBalance = new TotalBalance();
 

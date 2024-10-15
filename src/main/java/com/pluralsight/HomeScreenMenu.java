@@ -6,11 +6,10 @@ import java.util.Scanner;
  * When the program starts this Class is going to prompt the users to choose from different options.
  * Based on the user choice this Class is going to call other classes.
  */
-public class HomeScreen {
+public class HomeScreenMenu {
     static Scanner scanner = new Scanner(System.in);
-    static AddDeposit addDeposit = new AddDeposit();
-    static MakePayment makePayment = new MakePayment();
-    static Ledger ledger = new Ledger();
+    static MakePaymentMenu makePayment = new MakePaymentMenu();
+    static LedgerMenu ledger = new LedgerMenu();
 
 
     /**
@@ -38,7 +37,7 @@ public class HomeScreen {
             //This is checking if the used is calling AddDeposit Class
             if(userChoice.equalsIgnoreCase("D")){
                 System.out.println("------------------------------");
-                addDeposit.main();
+                AddDepositMenu.main();
                 System.out.println("------------------------------");
             }
             //This is checking if the used is calling MakePayment Class

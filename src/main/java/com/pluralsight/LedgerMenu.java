@@ -6,7 +6,7 @@ import java.util.Scanner;
  * This class is going to prompt the users to choose from different choices. Based on the user choice different
  * information will be printed.
  */
-public class Ledger {
+public class LedgerMenu {
     static Scanner scanner = new Scanner(System.in);
     static DisplayAllEntries displayAllEntries = new DisplayAllEntries();
     static DepositsOnly depositsOnly = new DepositsOnly();
