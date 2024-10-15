@@ -8,8 +8,8 @@ import java.io.FileReader;
  */
 public class TransactionBalance {
     /**
-     * Calculates the total balance for deposits.
-     * @return Total deposits.
+     * This GetTotalDeposits method is calculating Total Balance for Deposit.
+     * @return
      */
     public static double GetTotalDeposits(){
         double totalDeposit = 0.0;
@@ -35,39 +35,41 @@ public class TransactionBalance {
     }
 
     /**
-     * Calculates the total balance for payments.
-     * @return Total payments.
+     * This GetTotalPayment method is calculating Total Balance for Payment.
+     * @return
      */
-    public static double GetTotalPayment(){
+    public static double GetTotalPayment() {
         double totalPayment = 0.0;
-        try{
+        try {
             FileReader fileReader = new FileReader("transactions.csv");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String line;
-            while((line = bufferedReader.readLine()) != null){
+            while ((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split("\\|");
-                if(data[0].equalsIgnoreCase("Payment")){
+                if (data[0].equalsIgnoreCase("Payment")) {
                     double amount = Double.parseDouble(data[5].trim());
                     totalPayment -= amount;
                 }
             }
             bufferedReader.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return totalPayment;
+        return totalPayment;  // Return the total payment value
     }
 
+
     /**
-     * Calculates the total balance after subtracting payments from deposits.
+     * This is calculating the total amount after subtracting Payment from Deposit.
      */
     public static double GetAllTotal() {
-        double balance = 0.0; // Initialize the balance variable
+        double balance = 0.0;
 
-        try{
+        try {
             FileReader fileReader = new FileReader("transactions.csv");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
+
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split("\\|");
@@ -85,6 +87,8 @@ public class TransactionBalance {
                     System.out.println("Skipping malformed line: " + line);
                 }
             }
+
+            bufferedReader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,5 +96,3 @@ public class TransactionBalance {
         return balance;
     }
 }
-
-

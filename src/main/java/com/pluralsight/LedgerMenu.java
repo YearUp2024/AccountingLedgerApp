@@ -33,9 +33,7 @@ public class LedgerMenu {
             String userChoose = scanner.nextLine();
 
             if(userChoose.equalsIgnoreCase("A")){
-                System.out.println("------------------------------");
-                transactionDisplay.main();
-                System.out.println("------------------------------");
+                TransactionDisplay.main();
             }
 
             if(userChoose.equalsIgnoreCase("D")){

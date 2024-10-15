@@ -8,13 +8,22 @@ import java.util.Scanner;
  */
 public class MainMenu {
     static Scanner scanner = new Scanner(System.in);
-    /**
-     * This main method is prompting the user for an input. Based on the input different Classes are called.
-     */
-    public static void main(String[] args){
-        String userChoice;
 
-        while(true) {
+    /**
+     * This main method is calling Operation method.
+     * @param args
+     */
+    public static void main(String[] args) {
+        Options();
+    }
+
+    /**
+     * This method is prompting the user for an input. Based on the input different Classes are called.
+     */
+    public static void Options(){
+        String userChoice = "";
+        while(!userChoice.equalsIgnoreCase("E")) {
+            //Use can choose from these options
             System.out.println("Add [D]eposit");
             System.out.println("Make [P]ayment");
             System.out.println("[L]edger");
@@ -22,26 +31,29 @@ public class MainMenu {
             System.out.print("Choose from the Options: ");
             userChoice = scanner.nextLine();
 
-            switch(userChoice){
-                case "D":
-                    System.out.println("------------------------------");
-                    DepositMenu.main();
-                    System.out.println("------------------------------");
-                case "P":
-                    System.out.println("------------------------------");
-                    MakePaymentMenu.main();
-                    System.out.println("------------------------------");
-                case "L":
-                    System.out.println("------------------------------");
-                    LedgerMenu.main();
-                    System.out.println("------------------------------");
-                case "E":
-                    System.out.println("------------------------------");
-                    System.out.println("       Program Ended          ");
-                    System.out.println("------------------------------");
-                    return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+            //This is checking if the used is calling AddDeposit Class
+            if(userChoice.equalsIgnoreCase("D")){
+                System.out.println("------------------------------");
+                DepositMenu.main();
+                System.out.println("------------------------------");
+            }
+            //This is checking if the used is calling MakePayment Class
+            if(userChoice.equalsIgnoreCase("P")){
+                System.out.println("------------------------------");
+                MakePaymentMenu.main();
+                System.out.println("------------------------------");
+            }
+            //This is checking if the used is calling Ledger Class
+            if(userChoice.equalsIgnoreCase("L")){
+                System.out.println("------------------------------");
+                LedgerMenu.main();
+                System.out.println("------------------------------");
+            }
+            //This is checking if the used wants to end the loop
+            if(userChoice.equalsIgnoreCase("E")){
+                System.out.println("------------------------------");
+                System.out.println("       Program Ended          ");
+                System.out.println("------------------------------");
             }
         }
     }
