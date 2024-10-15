@@ -15,43 +15,52 @@ public class MakePaymentMenu {
     static TransactionBalance transactionBalance = new TransactionBalance();
 
     /**
-     * This method is calling PromptForPayment method.
+     * Main method to start the payment menu.
      */
     public static void main() {
-        MakePayOrSeePay();
+        ShowPaymentMenu();
     }
 
     /**
-     * This method is going to ask the user if they just want to see the payment balance or if they would like to
-     * make a payment.
+     * Displays the payment menu and handles user choices.
      */
-    public static void MakePayOrSeePay(){
-        while(true){
-            System.out.println("Make [P]ayment");
-            System.out.println("See [B]alance");
-            System.out.println("[E]xit");
-            String userChoice = scanner.nextLine();
+    public static void ShowPaymentMenu() {
+        while (true) {
+            DisplayMenu();
+            String userChoice = scanner.nextLine().trim().toUpperCase();
 
-            if(userChoice.equalsIgnoreCase("P")){
-                PromptForPayment();
-            }
-            if(userChoice.equalsIgnoreCase("B")){
-                double updatedBalance = transactionBalance.GetTotalPayment();
-                System.out.printf("Current Balance: %.2f\n", updatedBalance);
-                System.out.println("------------------------------");
-            }
-            if(userChoice.equalsIgnoreCase("E")){
-                break;
+            switch (userChoice) {
+                case "P":
+                    promptForPayment();
+                    break;
+                case "B":
+                    ShowBalance();
+                    break;
+                case "E":
+                    System.out.println("Exiting the application. Goodbye!");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
     }
 
     /**
-     * This method is going to ask the user to enter information for Payment.
+     * Displays the menu options.
      */
-    public static void PromptForPayment(){
+    private static void DisplayMenu() {
+        System.out.println("\nMake [P]ayment");
+        System.out.println("See [B]alance");
+        System.out.println("[E]xit");
+        System.out.print("Choose from the options: ");
+    }
+
+    /**
+     * Prompts the user to enter payment information.
+     */
+    public static void promptForPayment() {
         String makePayment;
-        do{
+        do {
             System.out.println("Please Enter Payment Information");
 
             System.out.print("Description: ");
@@ -61,67 +70,70 @@ public class MakePaymentMenu {
             String vendor = scanner.nextLine();
 
             System.out.print("Amount: ");
-            Double amount = scanner.nextDouble();
-            scanner.nextLine();
+            double amount = scanner.nextDouble();
+            scanner.nextLine(); // Consume newline
 
-            System.out.println("\nYour Payment: ");
-            AddPaymentToCSV(description, vendor, amount);//This is passing description, vendor, amount to AddPaymentToCSV method
+            AddPaymentToCSV(description, vendor, amount);
             System.out.println("\n-----------------------------");
 
-            makePayment = GetYesOrNo();
+            makePayment = GetYesOrNo("Would you like to make another payment? (Y/N): ");
 
-        }while(makePayment.equalsIgnoreCase("Y") || makePayment.equalsIgnoreCase("YES"));
+        } while (makePayment.equalsIgnoreCase("Y"));
         System.out.println("Thank You");
     }
 
     /**
-     * This method is going to make sure that the user enters Y or N to more forward.
-     * @return response
+     * Prompts the user for a yes or no response.
+     * @param prompt The prompt message.
+     * @return The user's response.
      */
-    public static String GetYesOrNo(){
-        String response = "";
-
-        while(true){
-            if(response.equalsIgnoreCase("Y") || response.equalsIgnoreCase("Yes") ||
-                    response.equalsIgnoreCase("N") || response.equalsIgnoreCase("No")){
+    public static String GetYesOrNo(String prompt) {
+        String response;
+        while (true) {
+            System.out.print(prompt);
+            response = scanner.nextLine().trim().toUpperCase();
+            if (response.equals("Y") || response.equals("N")) {
                 break;
-            }else{
-                System.out.print("Please enter (Y or N): ");
-                response = scanner.nextLine();
+            } else {
+                System.out.println("Invalid input. Please enter Y or N.");
             }
         }
         return response;
     }
 
     /**
-     * This method is getting Date and Time and storing that into the translations.csv file.
-     * @return Time & Date
+     * Displays the current balance.
      */
-    public static String TimeAndDate(){
+    public static void ShowBalance() {
+        double updatedBalance = transactionBalance.GetTotalPayment();
+        System.out.printf("Current Balance: %.2f\n", updatedBalance);
+        System.out.println("------------------------------");
+    }
+
+    /**
+     * Gets the current date and time.
+     * @return The current date and time as a formatted string.
+     */
+    public static String GetTimeAndDate() {
         LocalDate localDate = LocalDate.now();
         LocalTime localTime = LocalTime.now();
         return localDate + "|" + localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond();
     }
 
     /**
-     * This method is going to write the information the user passed into transactions.csv file.
-     * @param description
-     * @param vendor
-     * @param amount
+     * Writes the payment information to the transactions.csv file.
+     * @param description The payment description.
+     * @param vendor The vendor name.
+     * @param amount The payment amount.
      */
-    public static void AddPaymentToCSV(String description, String vendor, double amount){
-        try{
-            FileWriter fileWriter = new FileWriter("transactions.csv", true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-            bufferedWriter.write(String.format("Payment|%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount));//TimeAndDate method is called here.
-            bufferedWriter.close();
-
+    public static void AddPaymentToCSV(String description, String vendor, double amount) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("transactions.csv", true))) {
+            bufferedWriter.write(String.format("Payment|%s|%s|%s|%.2f\n", GetTimeAndDate(), description, vendor, amount));
             System.out.println("Payment Added Successfully!");
 
             double updatedBalance = transactionBalance.GetTotalPayment();
-            System.out.printf("Current Balance: %.2f", updatedBalance);
-        }catch(Exception e){
+            System.out.printf("Current Balance: %.2f\n", updatedBalance);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
