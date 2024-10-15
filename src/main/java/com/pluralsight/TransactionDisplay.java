@@ -58,37 +58,19 @@ public class TransactionDisplay {
         if(allEntries.isEmpty()){
             System.out.println("No entries found");
         }else{
-            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.printf("| %-20s | %-20s | %-30s | %-30s | %-20s |\n", "Tranasaction Type", "Date", "Time", "Description", "Vendor");
-            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-            for(String key : allEntries.keySet()){
+            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.printf("| %-20s | %-20s | %-20s | %-30s | %-30s | %-20s |\n", "Transaction Type", "Date", "Time", "Description", "Vendor", "Amount");
+            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            for(String key : allEntries.keySet()) {
                 String[] data = allEntries.get(key);
-                System.out.printf("| %-20s | %-20s | %-30s | %-30s | %-20s |\n", key.split("-")[0], data[0], data[1], data[2], data[3], data[4]);
+                if (data.length == 5) {
+                    System.out.printf("| %-20s | %-20s | %-20s | %-30s | %-30s | %-20s |\n", key.split("-")[0], data[0], data[1], data[2], data[3], data[4]);
+
+                }
             }
         }
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("                                                    %s\n",TransactionBalance.GetAllTotal());
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("                                                                %s\n",TransactionBalance.GetAllTotal());
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 }
-
-
-//public static void displayAllEntries(){
-//    while(true){
-//        System.out.println("All entries");
-//        System.out.printf("| %15s | %15s | %-30s | %15s | %15s |\n", "Date", "Time", "Description", "Vendor", "Amount");
-//        System.out.println("----------------------------------------------------------------------------------------------------------");
-//        for (Transaction t : transactions) {
-//            System.out.printf("| %15s | %15s | %-30s | %15s | %15s |\n", t.getDate(),
-//                    t.getTime(),
-//                    t.getDescription(),
-//                    t.getVendorName(),
-//                    t.getAmount());
-//        }
-//        boolean returnToMenu = Console.PromptForYesNo("Would you like to return to previous menu?");
-//        if (returnToMenu)
-//            return;
-//    }
-//
-//
-//}

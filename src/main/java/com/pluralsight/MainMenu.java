@@ -15,13 +15,12 @@ public class MainMenu {
         String userChoice;
 
         while(true) {
-            System.out.println("\nPlease choose from the following options:");
-            System.out.println("[D] Add Deposit - Add money to your account");
-            System.out.println("[P] Make Payment - Pay your bills or transfer money");
-            System.out.println("[L] Ledger - View your transaction history");
-            System.out.println("[E] Exit - Exit the application");
-            System.out.print("Enter your choice: ");
-            userChoice = scanner.nextLine().trim().toUpperCase();
+            System.out.println("Add [D]eposit");
+            System.out.println("Make [P]ayment");
+            System.out.println("[L]edger");
+            System.out.println("[E]xit");
+            System.out.print("Choose from the Options: ");
+            userChoice = scanner.nextLine();
 
             switch(userChoice){
                 case "D":
@@ -40,6 +39,7 @@ public class MainMenu {
                     System.out.println("------------------------------");
                     System.out.println("       Program Ended          ");
                     System.out.println("------------------------------");
+                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
