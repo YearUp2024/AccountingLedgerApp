@@ -8,8 +8,8 @@ import java.io.FileReader;
  */
 public class TransactionBalance {
     /**
-     * This GetTotalDeposits method is calculating Total Balance for Deposit.
-     * @return
+     * Calculates the total balance for deposits.
+     * @return Total deposits.
      */
     public static double GetTotalDeposits(){
         double totalDeposit = 0.0;
@@ -35,8 +35,8 @@ public class TransactionBalance {
     }
 
     /**
-     * This GetTotalPayment method is calculating Total Balance for Payment.
-     * @return
+     * Calculates the total balance for payments.
+     * @return Total payments.
      */
     public static double GetTotalPayment(){
         double totalPayment = 0.0;
@@ -48,7 +48,6 @@ public class TransactionBalance {
             while((line = bufferedReader.readLine()) != null){
                 String[] data = line.split("\\|");
                 if(data[0].equalsIgnoreCase("Payment")){
-                    //This is convergent the number from string to double and trim is removing any space before and after.
                     double amount = Double.parseDouble(data[5].trim());
                     totalPayment -= amount;
                 }
@@ -61,7 +60,7 @@ public class TransactionBalance {
     }
 
     /**
-     * This is calculating the total amount after subtracting Payment from Deposit.
+     * Calculates the total balance after subtracting payments from deposits.
      */
     public static void GetAllTotal(){
         double balance = 0.0;
@@ -74,10 +73,9 @@ public class TransactionBalance {
             while((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split("\\|");
 
-                // Ensure the line has exactly 6 parts (TransactionType, Date, Time, Description, Vendor, Amount)
                 if(data.length == 6) {
                     String transactionType = data[0];
-                    double amount = Double.parseDouble(data[5].trim()); // Trim to avoid whitespace issues
+                    double amount = Double.parseDouble(data[5].trim());
 
                     if(transactionType.equalsIgnoreCase("deposit")) {
                         balance += amount;
@@ -85,7 +83,7 @@ public class TransactionBalance {
                         balance -= amount;
                     }
                 } else {
-                    System.out.println("Skipping malformed line: " + line); // Debugging info
+                    System.out.println("Skipping malformed line: " + line);
                 }
             }
 

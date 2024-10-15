@@ -8,11 +8,8 @@ import java.util.HashMap;
  * This class is going to print All the Transactions in the screen.
  */
 public class TransactionDisplay {
-    static TransactionBalance transactionBalance = new TransactionBalance();
     /**
-     * In this main method a HashMap is calling LoadAllEntries method to get the transactions and store it in
-     * a HashMap. And then the transactions are being passed onto DisplayAllEntries method so it can be
-     * printed in the screen.
+     * Main method to start the transaction display.
      */
     public static void main() {
         HashMap<String, String[]> allEntries = LoadAllEntries();
@@ -20,8 +17,8 @@ public class TransactionDisplay {
     }
 
     /**
-     * This method is loading the transactions from transactions.csv and storing it in a HashMap.
-     * @return allProducts
+     * Loads the transactions from transactions.csv and stores them in a HashMap.
+     * @return allEntries
      */
     public static HashMap<String, String[]> LoadAllEntries(){
         String fileToGetDataFrom = "transactions.csv";
@@ -54,7 +51,7 @@ public class TransactionDisplay {
     }
 
     /**
-     * This method is printing all the transactions to the screen.
+     * Prints all the transactions to the screen.
      * @param allEntries
      */
     public static void DisplayAllEntries(HashMap<String, String[]> allEntries){
@@ -63,10 +60,9 @@ public class TransactionDisplay {
         }else{
             for(String key : allEntries.keySet()){
                 String[] data = allEntries.get(key);
-                //key.split("-")[0] gets unique identifier
                 System.out.printf("%s|%s|%s|%s|%s|%s\n", key.split("-")[0], data[0], data[1], data[2], data[3], data[4]);
             }
         }
-        transactionBalance.GetAllTotal();
+        TransactionBalance.GetAllTotal();
     }
 }

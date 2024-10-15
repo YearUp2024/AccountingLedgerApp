@@ -12,7 +12,6 @@ import java.util.Scanner;
  */
 public class MakePaymentMenu {
     static Scanner scanner = new Scanner(System.in);
-    static TransactionBalance transactionBalance = new TransactionBalance();
 
     /**
      * Main method to start the payment menu.
@@ -105,7 +104,7 @@ public class MakePaymentMenu {
      * Displays the current balance.
      */
     public static void ShowBalance() {
-        double updatedBalance = transactionBalance.GetTotalPayment();
+        double updatedBalance = TransactionBalance.GetTotalPayment();
         System.out.printf("Current Balance: %.2f\n", updatedBalance);
         System.out.println("------------------------------");
     }
@@ -131,7 +130,7 @@ public class MakePaymentMenu {
             bufferedWriter.write(String.format("Payment|%s|%s|%s|%.2f\n", GetTimeAndDate(), description, vendor, amount));
             System.out.println("Payment Added Successfully!");
 
-            double updatedBalance = transactionBalance.GetTotalPayment();
+            double updatedBalance = TransactionBalance.GetTotalPayment();
             System.out.printf("Current Balance: %.2f\n", updatedBalance);
         } catch (Exception e) {
             e.printStackTrace();
