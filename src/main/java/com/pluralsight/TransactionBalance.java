@@ -62,36 +62,35 @@ public class TransactionBalance {
     /**
      * Calculates the total balance after subtracting payments from deposits.
      */
-    public static void GetAllTotal(){
-        double balance = 0.0;
+    public static double GetAllTotal() {
+        double balance = 0.0; // Initialize the balance variable
 
-        try {
+        try{
             FileReader fileReader = new FileReader("transactions.csv");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-
             String line;
-            while((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split("\\|");
 
-                if(data.length == 6) {
+                if (data.length == 6) {
                     String transactionType = data[0];
                     double amount = Double.parseDouble(data[5].trim());
 
-                    if(transactionType.equalsIgnoreCase("deposit")) {
+                    if (transactionType.equalsIgnoreCase("deposit")) {
                         balance += amount;
-                    } else if(transactionType.equalsIgnoreCase("payment")) {
+                    } else if (transactionType.equalsIgnoreCase("payment")) {
                         balance -= amount;
                     }
                 } else {
                     System.out.println("Skipping malformed line: " + line);
                 }
             }
-
-            bufferedReader.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println(balance);
+        return balance;
     }
 }
+
+

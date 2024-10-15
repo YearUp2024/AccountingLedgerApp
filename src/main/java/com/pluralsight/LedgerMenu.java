@@ -39,7 +39,6 @@ public class LedgerMenu {
                     DisplayReports();
                     break;
                 case "H":
-                case "HOME":
                     System.out.println("Returning to home.");
                     return;
                 default:
@@ -64,9 +63,7 @@ public class LedgerMenu {
      * Displays all entries.
      */
     private static void DisplayAllEntries() {
-        System.out.println("------------------------------");
         TransactionDisplay.main();
-        System.out.println("------------------------------");
     }
 
     /**
