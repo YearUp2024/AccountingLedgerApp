@@ -8,9 +8,7 @@ import java.util.Scanner;
  */
 public class LedgerMenu {
     static Scanner scanner = new Scanner(System.in);
-    static TransactionDisplay transactionDisplay = new TransactionDisplay();
     static DepositsOnly depositsOnly = new DepositsOnly();
-    static TransactionBalance transactionBalance = new TransactionBalance();
 
     /**
      * This main method is calling Options method.

@@ -90,11 +90,17 @@ public class DepositMenu {
      * @param amount
      */
     public static void AddDepositToCSV(String description, String vendor, double amount){
+
+        //create a Transaction object.
+        //add it to the Transaction.FullLedger arraylist
+        //save the file by calling Transaction.SaveToFile();
+
+
         try{
             FileWriter fileWriter = new FileWriter("transactions.csv", true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            bufferedWriter.write(String.format("Deposit|%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount));//TimeAndDate method is called here.
+            bufferedWriter.write(String.format("%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount));//TimeAndDate method is called here.
             bufferedWriter.close();
 
             System.out.println("-----------------------------");

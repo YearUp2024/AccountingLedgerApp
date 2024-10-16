@@ -14,8 +14,10 @@ public class MainMenu {
      * @param args
      */
     public static void main(String[] args) {
+        Transaction.LoadFromFile();
         Options();
     }
+
 
     /**
      * This method is prompting the user for an input. Based on the input different Classes are called.

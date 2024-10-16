@@ -74,15 +74,10 @@ public class TransactionBalance {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split("\\|");
 
-                if (data.length == 6) {
+                if (data.length == 5) {
                     String transactionType = data[0];
-                    double amount = Double.parseDouble(data[5].trim());
+                    double amount = Double.parseDouble(data[4].trim());
 
-                    if (transactionType.equalsIgnoreCase("deposit")) {
-                        balance += amount;
-                    } else if (transactionType.equalsIgnoreCase("payment")) {
-                        balance -= amount;
-                    }
                 } else {
                     System.out.println("Skipping malformed line: " + line);
                 }

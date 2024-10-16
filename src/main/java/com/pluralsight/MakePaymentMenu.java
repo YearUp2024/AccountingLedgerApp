@@ -1,19 +1,17 @@
 package com.pluralsight;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 
 public class MakePaymentMenu {
     static Scanner scanner = new Scanner(System.in);
-    static TransactionBalance totalBalance = new TransactionBalance();
 
     /**
      * This method is calling PromptForPayment method.
      */
     public static void main() {
+        Transaction.LoadFromFile();
         MakePayOrSeePay();
     }
 
@@ -33,10 +31,9 @@ public class MakePaymentMenu {
                 PromptForPayment();
             }
             if(userChoice.equalsIgnoreCase("B")){
-                double updatedBalance = TransactionBalance.GetTotalPayment();
-                System.out.println("------------------------------");
-                System.out.printf("Current Balance: %.2f\n", updatedBalance);
-                System.out.println("------------------------------");
+                DisplayAllEntries();
+                double runningBalance = CalculateRunningBalance();
+                System.out.printf("Running Balance: %.2f\n", runningBalance);
             }
             if(userChoice.equalsIgnoreCase("E")){
                 break;
@@ -48,7 +45,7 @@ public class MakePaymentMenu {
      * This method is going to ask the user to enter information for Payment.
      */
     public static void PromptForPayment(){
-        String makePayment = "";
+        String makePayment;
         do{
             System.out.println("Please Enter Payment Information");
 
@@ -59,12 +56,17 @@ public class MakePaymentMenu {
             String vendor = scanner.nextLine();
 
             System.out.print("Amount: ");
-            Double amount = scanner.nextDouble();
+            Double amount = scanner.nextDouble() * - 1;
             scanner.nextLine();
 
-            AddPaymentToCSV(description, vendor, amount);
-            System.out.println("\n-----------------------------");
+            Transaction newPayment = new Transaction(CurrentDate(), CurrentTime(), description, vendor, amount);
+            Transaction.FullLedger().add(newPayment);
 
+            Transaction.SaveToFile(Transaction.FullLedger());
+            System.out.println("Payment added Successfully");
+
+            System.out.println("Do you want to make another payment (Y/N): ");
+            makePayment = scanner.nextLine();
         }while(makePayment.equalsIgnoreCase("Y") || makePayment.equalsIgnoreCase("YES"));
     }
 
@@ -72,33 +74,28 @@ public class MakePaymentMenu {
      * This method is getting Date and Time and storing that into the translations.csv file.
      * @return Time & Date
      */
-    public static String TimeAndDate(){
+    public static String CurrentDate(){
         LocalDate localDate = LocalDate.now();
-        LocalTime localTime = LocalTime.now();
-        return localDate + "|" + localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond();
+        return localDate.toString();
     }
 
-    /**
-     * This method is going to write the information the user passed into transactions.csv file.
-     * @param description
-     * @param vendor
-     * @param amount
-     */
-    public static void AddPaymentToCSV(String description, String vendor, double amount){
-        try{
-            FileWriter fileWriter = new FileWriter("transactions.csv", true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+    public static String CurrentTime(){
+        LocalTime localTime = LocalTime.now();
+        return localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond();
+    }
 
-            bufferedWriter.write(String.format("Payment|%s|%s|%s|%.2f\n", TimeAndDate(), description, vendor, amount));//TimeAndDate method is called here.
-            bufferedWriter.close();
-
-            System.out.println("------------------------------");
-            System.out.println("Payment Added Successfully!");
-
-            double updatedBalance = TransactionBalance.GetTotalPayment();
-            System.out.printf("Current Balance: %.2f", updatedBalance);
-        }catch(Exception e){
-            e.printStackTrace();
+    public static void DisplayAllEntries(){
+        for(Transaction transaction : Transaction.FullLedger()){
+            transaction.PrintTransaction();
         }
+    }
+
+    public static double CalculateRunningBalance(){
+        double balance = 0.0;
+
+        for(Transaction transaction : Transaction.FullLedger()){
+            balance += transaction.amount;
+        }
+        return balance;
     }
 }
