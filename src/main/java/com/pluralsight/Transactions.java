@@ -147,6 +147,11 @@ public class Transactions {
         }
     }
 
+    /**
+     * This Method is going to Display Transactions
+     * @param transactions
+     * @param transactionType
+     */
     public static void displayTransactions(ArrayList<Transactions> transactions, String transactionType){
         double total = 0;
         System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------");
@@ -174,15 +179,15 @@ public class Transactions {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
         switch (transactionType) {
             case "D":
-                System.out.printf("|                                                   Total Deposits: %.2f                                                   |", total);
+                System.out.printf("|                                                   Total Deposits: %.2f                                                 |", total);
                 System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
                 break;
             case "P":
-                System.out.printf("|                                                   Total Deposits: %.2f                                                   |", total);
+                System.out.printf("|                                                   Total Deposits: %.2f                                                 |", total);
                 System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
                 break;
             default:
-                System.out.printf("|                                                   Total Deposits: %.2f                                                   |", total);
+                System.out.printf("|                                                   Total Deposits: %.2f                                                 |", total);
                 System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
                 break;
         }
