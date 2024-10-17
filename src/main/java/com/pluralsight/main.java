@@ -55,12 +55,15 @@ public class main {
      */
     public static void addDeposit(ArrayList<Transactions> transactions){
         //This is going to prompt the user for "Deposit" details
-        Transactions transaction = promptTransaction("Deposit");
+        Transactions transaction = promptTransaction();
         //This is going to add the deposit to the ArrayList.
         transactions.add(transaction);
         //This is going to save the transaction to the .csv file.
         Transactions.saveTransaction("transactions.csv", transaction);
-        System.out.println("\nYour Deposit Added Successfully\n");
+
+        System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("|                                                       Your Deposit Added Successfully                                      |");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------\n");
     }
 
     /**
@@ -69,7 +72,7 @@ public class main {
      */
     public static void addPayment(ArrayList<Transactions> transactions){
         //This is going to prompt the user for "Payment" details
-        Transactions transaction = promptTransaction("Payment");
+        Transactions transaction = promptTransaction();
         //This is converting the amount into a negative number.
         double negativeAmount = transaction.getAmount() * -1;
         //This is creating a new Transaction object with negative amount.
@@ -78,15 +81,16 @@ public class main {
         transactions.add(transaction);
         //This is saving the transaction to the file.
         Transactions.saveTransaction("transactions.csv", transaction);
-        System.out.println("\nYour Payment Added Successfully\n");
+        System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("|                                                       Your Payment Added Successfully                                      |");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------\n");
     }
 
     /**
      * This Method is going to prompt the user to enter Transaction information.
-     * @param transactionType
      * @return
      */
-    private static Transactions promptTransaction(String transactionType) {
+    private static Transactions promptTransaction() {
         System.out.println("\n");
         System.out.print("Enter date (YYYY-MM-DD): ");
         String date = scanner.nextLine();
