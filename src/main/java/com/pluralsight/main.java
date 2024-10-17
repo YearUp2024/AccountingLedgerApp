@@ -196,7 +196,6 @@ public class main {
         return transactions;
     }
 
-
     /**
      * This Method is going to prompt the user to choose from the Report menu
      * @param transactions
@@ -231,7 +230,7 @@ public class main {
                     searchByVendor(transactions);
                     break;
                 case "0":
-                    System.out.println("Returning to the main menu.");
+                    System.out.println("Returning to the main menu.\n");
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
@@ -300,7 +299,7 @@ public class main {
      * @param transactions
      */
     public static void searchByVendor(ArrayList<Transactions> transactions){
-        System.out.println("Please enter vendor name: ");
+        System.out.print("Please enter vendor name: ");
         String vendor = scanner.nextLine();
 
         System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------");
@@ -308,7 +307,9 @@ public class main {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("| %-20s | %-20s | %-30s | %-20s | %-20s |\n", "Date", "Time", "Description", "Vendor", "Amount");
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+        //This is going to iterate over each transaction.
         for(Transactions transaction : transactions){
+            //This is checking if the transaction vendor matches the entered vendor name.
             if(transaction.getVendor().equalsIgnoreCase(vendor)){
                 System.out.printf("| %-20s | %-20s | %-30s | %-20s | %-20.2f |\n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
             }
@@ -323,6 +324,7 @@ public class main {
      * @param endDate
      */
     public static void finteredByDate(ArrayList<Transactions> transactions, LocalDate startDate, LocalDate endDate){
+        //This is defining the date format.
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------");
@@ -330,8 +332,10 @@ public class main {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("| %-20s | %-20s | %-30s | %-20s | %-20s |\n", "Date", "Time", "Description", "Vendor", "Amount");
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+        //This is going to iterate over every transaction.
         for(Transactions transaction : transactions){
             LocalDate transactionDate = LocalDate.parse(transaction.getDate(), formatter);
+            //This checks if the transaction date is within a specific range.
             if ((transactionDate.isEqual(startDate) || transactionDate.isAfter(startDate)) &&
                     (transactionDate.isEqual(endDate) || transactionDate.isBefore(endDate))) {
                 System.out.printf("| %-20s | %-20s | %-30s | %-20s | %-20.2f |\n",
@@ -341,4 +345,3 @@ public class main {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------\n");
     }
 }
-
