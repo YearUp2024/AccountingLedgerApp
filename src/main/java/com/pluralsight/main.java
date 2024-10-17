@@ -2,6 +2,8 @@ package com.pluralsight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,6 +23,7 @@ public class main {
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment");
             System.out.println("L) Ledger");
+            System.out.println("R) Reports");
             System.out.println("X) Exit");
             System.out.print("Choose an option: ");
             choice = scanner.nextLine().toUpperCase();
@@ -37,6 +40,10 @@ public class main {
                 //This method is going to call showLedger method.
                 case "L":
                     showLedger(transactions);
+                    break;
+                //This method is going to call showLedger method.
+                case "R":
+                    showReports(transactions);
                     break;
                 //This is going to end the loop
                 case "X":
@@ -108,7 +115,7 @@ public class main {
     }
 
     /**
-     * This Method is going to prompt the user to choose from the Ledger menue.
+     * This Method is going to prompt the user to choose from the Ledger menu.
      * @param transactions
      */
     public static void showLedger(ArrayList<Transactions> transactions){
@@ -188,4 +195,150 @@ public class main {
         }
         return transactions;
     }
+
+
+    /**
+     * This Method is going to prompt the user to choose from the Report menu
+     * @param transactions
+     */
+    private static void showReports(ArrayList<Transactions> transactions) {
+        String userChoice;
+        System.out.println("\n");
+        do {
+            System.out.println("1) Month To Date");
+            System.out.println("2) Previous Month");
+            System.out.println("3) Year To Date");
+            System.out.println("4) Previous Year");
+            System.out.println("5) Search by Vendor");
+            System.out.println("0) Back");
+            System.out.print("Choose a report: ");
+            userChoice = scanner.nextLine();
+
+            switch (userChoice) {
+                case "1":
+                    monthToDateReport(transactions);
+                    break;
+                case "2":
+                    previousMonthReport(transactions);
+                    break;
+                case "3":
+                    yearTodate(transactions);
+                    break;
+                case "4":
+                    previousYear(transactions);
+                    break;
+                case "5":
+                    searchByVendor(transactions);
+                    break;
+                case "0":
+                    System.out.println("Returning to the main menu.");
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        } while (!userChoice.equals("0"));
+    }
+
+    /**
+     * This Method is going to print the transaction from the first day of the month to date.
+     * @param transactions
+     */
+    public static void monthToDateReport(ArrayList<Transactions> transactions){
+        //This is getting today's date
+        LocalDate date = LocalDate.now();
+        //This is getting the first date of the month.
+        LocalDate dayOfMonth = date.withDayOfMonth(1);
+        //This is going to display transactions from the first day of the month to date.
+        finteredByDate(transactions, dayOfMonth, date);
+    }
+
+    /**
+     * This Method is going to print the transaction from the first day of the month to date.
+     * @param transactions
+     */
+    public static void previousMonthReport(ArrayList<Transactions> transactions){
+        //This is getting today's date
+        LocalDate date = LocalDate.now();
+        //This is getting the first date of the previous month.
+        LocalDate firstDateOfPreviousMonth = date.minusMonths(1).withDayOfMonth(1);
+        //This is getting the last date of the previous month.
+        LocalDate lastDateOfPreviousMonth = date.withDayOfMonth(1).minusDays(1);
+        //This is going to display transactions from the first day of the month to date.
+        finteredByDate(transactions, firstDateOfPreviousMonth, lastDateOfPreviousMonth);
+    }
+
+    /**
+     * This Method is going to print the transaction from the first day of current year.
+     * @param transactions
+     */
+    public static void yearTodate(ArrayList<Transactions> transactions){
+        //This is getting today's date
+        LocalDate date = LocalDate.now();
+        //This is getting the first date of the current year.
+        LocalDate firstDateOfYear = date.withDayOfYear(1);
+        //This is going to display transactions from the first day of the month to date.
+        finteredByDate(transactions, firstDateOfYear, date);
+    }
+
+    /**
+     * This Method is going to print the transaction from the previous year.
+     * @param transactions
+     */
+    public static void previousYear(ArrayList<Transactions> transactions){
+        //This is getting today's date
+        LocalDate date = LocalDate.now();
+        //This is getting the first date of the previous month.
+        LocalDate firstDateOfPreviousYear = date.minusYears(1).withDayOfYear(1);
+        //This is getting the last date of the previous month.
+        LocalDate lastDateOfPreviousYear = date.withDayOfYear(1).minusDays(1);
+        //This is going to display transactions from the first day of the month to date.
+        finteredByDate(transactions, firstDateOfPreviousYear, lastDateOfPreviousYear);
+    }
+
+    /**
+     * This Method is going to print transaction based on Vendor.
+     * @param transactions
+     */
+    public static void searchByVendor(ArrayList<Transactions> transactions){
+        System.out.println("Please enter vendor name: ");
+        String vendor = scanner.nextLine();
+
+        System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("|                                                       Vendor entries                                                      |");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("| %-20s | %-20s | %-30s | %-20s | %-20s |\n", "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+        for(Transactions transaction : transactions){
+            if(transaction.getVendor().equalsIgnoreCase(vendor)){
+                System.out.printf("| %-20s | %-20s | %-30s | %-20s | %-20.2f |\n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            }
+        }
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------\n");
+    }
+
+    /**
+     * This Method is printing out the based of month
+     * @param transactions
+     * @param startDate
+     * @param endDate
+     */
+    public static void finteredByDate(ArrayList<Transactions> transactions, LocalDate startDate, LocalDate endDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("|                                                       Entries by Date                                                      |");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("| %-20s | %-20s | %-30s | %-20s | %-20s |\n", "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+        for(Transactions transaction : transactions){
+            LocalDate transactionDate = LocalDate.parse(transaction.getDate(), formatter);
+            if ((transactionDate.isEqual(startDate) || transactionDate.isAfter(startDate)) &&
+                    (transactionDate.isEqual(endDate) || transactionDate.isBefore(endDate))) {
+                System.out.printf("| %-20s | %-20s | %-30s | %-20s | %-20.2f |\n",
+                        transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            }
+        }
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------\n");
+    }
 }
+
