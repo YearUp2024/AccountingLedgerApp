@@ -15,6 +15,9 @@ The main menu offers the following options:
 * L) Ledger: View transaction history with options to filter by type.
 * X) Exit: Exit the application.
 
+<img width="1043" alt="Screenshot 2024-10-17 at 6 34 20 PM" src="https://github.com/user-attachments/assets/efc6c4e8-cfa5-436c-bf36-4e85b6a42027">
+
+
 ### Ledger
 * A) All: Display all transactions, with the most recent at the top.
 * D) Deposits: Show only deposit entries (positive transactions).
