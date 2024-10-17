@@ -148,6 +148,7 @@ public class Transactions {
     }
 
     public static void displayTransactions(ArrayList<Transactions> transactions, String transactionType){
+        double total = 0;
         System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------");
         switch (transactionType) {
             case "D":
@@ -168,7 +169,22 @@ public class Transactions {
         // Loop through the transactions and print each in the desired format
         for (Transactions transaction : transactions) {
             System.out.printf("| %-20s | %-20s | %-30s | %-20s | %-20.2f |\n",transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            total += transaction.getAmount();
         }
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+        switch (transactionType) {
+            case "D":
+                System.out.printf("|                                                   Total Deposits: %.2f                                                   |", total);
+                System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
+                break;
+            case "P":
+                System.out.printf("|                                                   Total Deposits: %.2f                                                   |", total);
+                System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
+                break;
+            default:
+                System.out.printf("|                                                   Total Deposits: %.2f                                                   |", total);
+                System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
+                break;
+        }
     }
 }
