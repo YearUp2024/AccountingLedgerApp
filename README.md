@@ -15,10 +15,16 @@ The main menu offers the following options:
 * L) Ledger: View transaction history with options to filter by type.
 * X) Exit: Exit the application.
 
+<img width="1043" alt="Screenshot 2024-10-17 at 6 34 20 PM" src="https://github.com/user-attachments/assets/efc6c4e8-cfa5-436c-bf36-4e85b6a42027">
+
 ### Ledger
 * A) All: Display all transactions, with the most recent at the top.
 * D) Deposits: Show only deposit entries (positive transactions).
 * P) Payments: Display only payment entries (negative transactions).
+
+<img width="1041" alt="Screenshot 2024-10-17 at 6 35 11 PM" src="https://github.com/user-attachments/assets/4bbed64e-2d8d-4f5a-80e8-2d65e8f9ffdd">
+
+<img width="1013" alt="Screenshot 2024-10-17 at 6 37 18 PM" src="https://github.com/user-attachments/assets/5ac1919a-6ef4-4314-b7ac-91cc4953ad3a">
 
 ### Reports
 Generate predefined or custom reports:
@@ -29,6 +35,11 @@ Generate predefined or custom reports:
 4) Previous Year: Lists transactions from the last year.
 5) Search by Vendor: Filter transactions by vendor name.
 0) Exit: Go to the main screen.
+1) 
+<img width="1050" alt="Screenshot 2024-10-17 at 6 38 21 PM" src="https://github.com/user-attachments/assets/a925af67-b3df-4749-94b0-9f02a381da96">
+
+
+<img width="1018" alt="Screenshot 2024-10-17 at 6 39 09 PM" src="https://github.com/user-attachments/assets/4ddcfa9a-7c10-4793-bd89-1f05987477c0">
 
 ### .CSV File Format
 Each line in the transactions.csv file corresponds to a transaction, formatted as follows:
