@@ -233,7 +233,9 @@ public class main {
                     System.out.println("Returning to the main menu.\n");
                     break;
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("|                                            Invalid option. Please try again.                                              |");
+                    System.out.println("-----------------------------------------------------------------------------------------------------------------------------\n");
             }
         } while (!userChoice.equals("0"));
     }
